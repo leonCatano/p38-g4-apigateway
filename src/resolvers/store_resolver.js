@@ -6,6 +6,13 @@ const storeResolver = {
       else
         return null
     },
+    storeByUserId: async(_, { userId }, { dataSources, userIdToken }) => {
+      if (userId == userIdToken) {
+        console.log(userId)
+        return await dataSources.shopAPI.storeByUserId(userId)
+      } else
+        return null
+    },
   },
   Mutation: {
     createStore: async (_, { userId, storeInput }, { dataSources, userIdToken }) => {

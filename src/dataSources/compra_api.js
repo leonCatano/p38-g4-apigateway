@@ -5,38 +5,36 @@ class CompraAPI extends RESTDataSource {
     super();
     this.baseURL = serverConfig.compra_api_url;
   }
-  async createCreditCard(creditCardInput) {
-    creditCard = new Object(JSON.parse(JSON.stringify(creditCardInput)));
-    return await this.post(`/creditCard/${userIdToken}/`, creditCard);
+
+  async createCreditCard(ccInput) {
+    return await this.post(`/creditCard/${ccInput.id_user}/`, ccInput);
   }
+
   async creditCardByUserId(userId) {
     return await this.get(`/creditCard/list/${userId}/`);
   }
 
   async updateCreditCard(creditCardId, creditCardInput) {
-    creditCard = new Object(JSON.parse(JSON.stringify(creditCardInput)));
-    return await this.put(`/creditCard/update/${userIdToken}/${creditCardId}`, creditCard);
+    return await this.put(`/creditCard/update/${creditCardInput.id_user}/${creditCardId}/`, creditCardInput);
   }
 
-  async deleteCreditCard(creditCardId) {
-    return await this.delete(`/creditCard/remove/${userIdToken}/${creditCardId}`);
+  async deleteCreditCard(userId, creditCardId) {
+    return await this.delete(`/creditCard/remove/${userId}/${creditCardId}/`);
   }
 
-  async createTransaction(transactionInput) {
-    transaction = new Object(JSON.parse(JSON.stringify(transactionInput)));
-    return await this.post(`/transaction/${userIdToken}/`, transaction);
+  async createTransaction(userId, transactionInput) {
+    return await this.post(`/transaction/${userId}/`, transactionInput);
   }
   async transactionByIdUser(userId) {
     return await this.get(`/transaction/list/${userId}/`);
   }
 
   async updateTransaction(userId, transactionId, transactionInput) {
-    transaction = new Object(JSON.parse(JSON.stringify(transactionInput)));
-    return await this.put(`/transaction/update/${userId}/${transactionId}`, transaction);
+    return await this.put(`/transaction/update/${userId}/${transactionId}/`, transactionInput);
   }
 
   async deleteTransaction(userId, transactionId) {
-    return await this.delete(`/transaction/remove/${userId}/${transactionId}`);
+    return await this.delete(`/transaction/remove/${userId}/${transactionId}/`);
   }
 }
 module.exports = CompraAPI;

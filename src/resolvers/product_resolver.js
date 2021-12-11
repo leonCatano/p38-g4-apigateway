@@ -6,6 +6,12 @@ const productResolver = {
       else
         return null
     },
+    productByNameStore: async(_, { userId, namestoreproduct }, { dataSources, userIdToken }) => {
+      if (userId == userIdToken)
+        return await dataSources.shopAPI.productByNameStore(userId, namestoreproduct)
+      else
+        return null
+    },
   },
   Mutation: {
     createProduct: async (_, { userId, productInput }, { dataSources, userIdToken }) => {

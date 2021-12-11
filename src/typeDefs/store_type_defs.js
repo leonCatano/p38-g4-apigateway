@@ -1,16 +1,16 @@
 const { gql } = require('apollo-server');
 const storeTypeDefs = gql `
   type Store {
-    Id : String!
-    storename: String!
-    detail: Int!
+    Id : Int!
+    name: String!
+    detail: String!
     adress: String!
     idcliente: Int!
   }
 
   input StoreInput {
-    storename: String!
-    detail: Int!
+    name: String!
+    detail: String!
     adress: String!
     idcliente: Int!
   }
@@ -24,6 +24,7 @@ const storeTypeDefs = gql `
 
   extend type Query {
     storeByStoreName(userId: Int!, storename: String!): [Store]
+    storeByUserId(userId: Int!): [Store]
   }
 `;
 module.exports = storeTypeDefs;

@@ -3,6 +3,7 @@ const typeDefs = require('./typeDefs');
 const resolvers = require('./resolvers');
 const CompraAPI = require('./dataSources/compra_api');
 const AuthAPI = require('./dataSources/auth_api');
+const ShopAPI = require('./dataSources/shop_api');
 const authentication = require('./utils/authentication');
 const server = new ApolloServer({
   context: authentication,
@@ -11,6 +12,8 @@ const server = new ApolloServer({
   dataSources: () => ({
     compraAPI: new CompraAPI(),
     authAPI: new AuthAPI(),
+    shopAPI: new ShopAPI(),
+
   }),
   introspection: true,
   playground: true

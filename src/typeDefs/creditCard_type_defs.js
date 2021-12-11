@@ -18,9 +18,9 @@ const creditCardTypeDefs = gql `
   }
 
   extend type Mutation {
-    createCreditCard(creditCardInput: CreditCardInput): CreditCard
+    createCreditCard( creditCardInput: CreditCardInput ): String
     updateCreditCard( creditCardId: Int!, creditCardInput: CreditCardInput): CreditCard
-    deleteCreditCard( creditCardId: Int!): String
+    deleteCreditCard( userId: Int!, creditCardId: Int!): String
 
   }
 

@@ -9,9 +9,16 @@ const creditCardResolver = {
   },
   Mutation: {
     createCreditCard: async (_, { creditCardInput }, { dataSources, userIdToken },  ) => {
-      if (creditCardInput.id_user == userIdToken)
-        return await dataSources.compraAPI.createCreditCard(creditCardInput)
-      else
+      const ccInput = {
+        card_name: creditCardInput.card_name,
+        card_number: creditCardInput.card_number,
+        card_franchise: creditCardInput.card_franchise,
+        bank_name: creditCardInput.bank_name,
+        id_user: creditCardInput.id_user,
+      }
+      if ( ccInput.id_user == userIdToken){
+        return await dataSources.compraAPI.createCreditCard(ccInput)
+      }else
         return null
     },
     updateCreditCard: async (_, { creditCardId, creditCardInput }, { dataSources, userIdToken },  ) => {
@@ -20,9 +27,9 @@ const creditCardResolver = {
       else
         return null
     },
-    deleteCreditCard: async (_, { creditCardId }, { dataSources, userIdToken },  ) => {
-      if (creditCardInput.id_user == userIdToken)
-        return await dataSources.compraAPI.deleteCreditCard(creditCardId)
+    deleteCreditCard: async (_, { userId, creditCardId }, { dataSources, userIdToken },  ) => {
+      if (userId == userIdToken)
+        return await dataSources.compraAPI.deleteCreditCard(userId, creditCardId)
       else
         return null
     },

@@ -7,15 +7,17 @@ class ShopAPI extends RESTDataSource {
   }
 
   async createStore(userId, storeInput) {
-    store = new Object(JSON.parse(JSON.stringify(storeInput)));
     return await this.post('/Stores', store);
   }
   async storeByStoreName(userId, storename) {
-    return await this.get(`/store/${storename}/`);
+    return await this.get(`/store/${storename}`);
+  }
+
+  async storeByUserId(userId) {
+    return await this.get(`/store/user/${userId}`);
   }
 
   async updateStore(userId, storeInput) {
-    store = new Object(JSON.parse(JSON.stringify(storeInput)));
     return await this.put('/store/update', store);
   }
 
@@ -24,12 +26,15 @@ class ShopAPI extends RESTDataSource {
   }
 
   async createProduct(userId, productInput) {
-    product = new Object(JSON.parse(JSON.stringify(productInput)));
     return await this.post('/products', product);
   }
 
   async productByCodeProduct(userId, codeproduct) {
     return await this.get(`/product/${codeproduct}`);
+  }
+
+  async productByNameStore(userId, namestoreproduct) {
+    return await this.get(`/product/store/${namestoreproduct}`);
   }
 
   async updateProduct(userId, productInput) {

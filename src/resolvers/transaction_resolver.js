@@ -1,7 +1,6 @@
 const transactionResolver = {
   Query: {
     transactionByIdUser: async(_, { userId }, { dataSources, userIdToken }) => {
-      //usernameToken = (await dataSources.authAPI.getUser(userIdToken)).username
       if (userId == userIdToken)
         return dataSources.compraAPI.transactionByIdUser(userId)
       else
@@ -10,9 +9,10 @@ const transactionResolver = {
   },
   Mutation: {
     createTransaction: async(_, { userId, transactionInput }, { dataSources, userIdToken }) => {
-      if ( userId == userIdToken )
-        return dataSources.compraAPI.createTransaction(ttInput)
-      else
+      if ( userId == userIdToken ) {
+        console.log(userId);
+        return dataSources.compraAPI.createTransaction(userId, transactionInput)
+      } else
         return null
     },
     updateTransaction: async (_, { userId, transactionId, transactionInput }, { dataSources, userIdToken },  ) => {

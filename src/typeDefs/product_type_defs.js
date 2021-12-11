@@ -23,7 +23,9 @@ const productTypeDefs = gql `
   }
 
   extend type Query {
-    productByCodeProduct(userId: Int!, codeproduct : String!): [Store]
+    productByCodeProduct(userId: Int!, codeproduct : String!): [Product]
+    productByNameStore(userId: Int!, namestoreproduct : String!): [Product]
+
   }
 `;
 module.exports = productTypeDefs;
