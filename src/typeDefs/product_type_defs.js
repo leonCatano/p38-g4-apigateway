@@ -6,6 +6,7 @@ const productTypeDefs = gql `
     productname: String!
     precio: Int!
     categoria: String!
+    userId: Int!
   }
 
   input ProductInput {
@@ -14,6 +15,7 @@ const productTypeDefs = gql `
     productname: String!
     precio: Int!
     categoria: String!
+    userId: Int!
   }
 
   extend type Mutation {
@@ -25,7 +27,7 @@ const productTypeDefs = gql `
   extend type Query {
     productByCodeProduct(userId: Int!, codeproduct : String!): [Product]
     productByNameStore(userId: Int!, namestoreproduct : String!): [Product]
-
+    productByUserId(userId: Int!): [Product]
   }
 `;
 module.exports = productTypeDefs;

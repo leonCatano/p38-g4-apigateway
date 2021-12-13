@@ -12,6 +12,12 @@ const productResolver = {
       else
         return null
     },
+    productByUserId: async(_, { userId }, { dataSources, userIdToken }) => {
+      if (userId == userIdToken)
+        return await dataSources.shopAPI.productByUserId(userId)
+      else
+        return null
+    },
   },
   Mutation: {
     createProduct: async (_, { userId, productInput }, { dataSources, userIdToken }) => {
@@ -22,13 +28,13 @@ const productResolver = {
     },
     updateProduct: async (_, { userId, productInput }, { dataSources, userIdToken }) => {
       if ( userId == userIdToken)
-        return await dataSources.shopAPI.updateProduct(userId, productInput)
+        return await dataSources.shopAPI.updateProduct(productInput)
       else
         return null
     },
     deleteProduct: async (_, {  userId, codeproduct }, { dataSources, userIdToken }) => {
       if ( userId == userIdToken)
-        return await dataSources.shopAPI.deleteProduct(userId, storename)
+        return await dataSources.shopAPI.deleteProduct(codeproduct)
       else
         return null
     },

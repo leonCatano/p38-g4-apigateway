@@ -7,7 +7,7 @@ class ShopAPI extends RESTDataSource {
   }
 
   async createStore(userId, storeInput) {
-    return await this.post('/Stores', store);
+    return await this.post('/stores', storeInput);
   }
   async storeByStoreName(userId, storename) {
     return await this.get(`/store/${storename}`);
@@ -18,7 +18,7 @@ class ShopAPI extends RESTDataSource {
   }
 
   async updateStore(userId, storeInput) {
-    return await this.put('/store/update', store);
+    return await this.put('/store/update', storeInput);
   }
 
   async deleteStore(userId, storename) {
@@ -26,23 +26,26 @@ class ShopAPI extends RESTDataSource {
   }
 
   async createProduct(userId, productInput) {
-    return await this.post('/products', product);
+    return await this.post('/products', productInput);
   }
 
   async productByCodeProduct(userId, codeproduct) {
     return await this.get(`/product/${codeproduct}`);
   }
 
+  async productByUserId(userId) {
+    return await this.get(`/product/user/${userId}`);
+  }
+
   async productByNameStore(userId, namestoreproduct) {
     return await this.get(`/product/store/${namestoreproduct}`);
   }
 
-  async updateProduct(userId, productInput) {
-    product = new Object(JSON.parse(JSON.stringify(productInput)));
-    return await this.put('/product/update', product);
+  async updateProduct(productInput) {
+    return await this.put('/product/update', productInput);
   }
 
-  async deleteProduct(userId, codeproduct) {
+  async deleteProduct(codeproduct) {
     return await this.delete(`/product/delete/${codeproduct}`);
   }
 }
